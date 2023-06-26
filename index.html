@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Ubuntu+Mono:ital@1&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Lexend+Deca:wght@300&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Special+Elite&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Yatra+One&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Ysabeau+SC:wght@100&display=swap" rel="stylesheet">
+
+    <title>House Price Perediction Page</title>
+
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            padding: 0;
+            background-color: black;
+            background-image: url("https://wallpaperaccess.com/full/1398312.jpg");
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+
+        header {
+            margin-top: 0px;
+            background-color: black;
+            color: whitesmoke;
+            font-size: 20px;
+            padding: 15px;
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            font-family: 'Cinzel', serif;
+        }
+
+        .container {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            grid-gap: 10px;
+            margin-top: 0px;
+            width: 800px;
+            height: 272px;
+            margin-right: 5px;
+            margin-left: 5px;
+        }
+
+        .container input[type="text"] {
+            width: 100%;
+            padding: 5px;
+            box-sizing: border-box;
+            font-size: 15px;
+            /* font-family: 'Ubuntu Mono', monospace; */
+            text-align: center;
+        }
+
+        .container .input-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .container label {
+            font-family: 'Lexend Deca', sans-serif;
+            margin-bottom: 5px;
+        }
+
+        .button-row {
+            display: flex;
+            justify-content: center;
+            margin-top: 10px;
+        }
+
+        .button-row button {
+            margin: 5px;
+            padding: 10px 20px;
+        }
+
+        .container .submit-button {
+            grid-column: 1 / -1;
+            margin-top: 20px;
+            text-align: end;
+        }
+
+        .container .submit-button button {
+            padding: 5px 5px;
+            font-family: 'Ysabeau SC', sans-serif;
+            font-size: 18px;
+            color: white;
+            background-color: black;
+        }
+
+        .fixed-div {
+            text-align: right;
+            width: 1100px;
+            height: 550px;
+            background-color: #f0f0f0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .container .prediction {
+            font-family: 'Yatra One', cursive;
+            font-size: 18px;
+        }
+
+        .error-message {
+            color: red;
+        }
+    </style>
+
+    <script>
+        function validateForm() {
+            var input1 = document.getElementById("input1").value;
+            var input2 = document.getElementById("input2").value;
+            var input3 = document.getElementById("input3").value;
+            var input4 = document.getElementById("input4").value;
+            var input5 = document.getElementById("input5").value;
+            var input6 = document.getElementById("input6").value;
+            var input7 = document.getElementById("input7").value;
+            var input8 = document.getElementById("input8").value;
+            var input9 = document.getElementById("input9").value;
+            var input10 = document.getElementById("input10").value;
+
+            if (input1 === "" || input2 === "" || input3 === "" || input4 === "" || input5 === "" || input6 === "" || input7 === "" || input8 === "" || input9 === "" || input10 === "") {
+                alert("Please fill in all the fields.");
+                return false;
+            }
+
+            if (isNaN(Number(input1)) || isNaN(Number(input2)) || isNaN(Number(input3)) || isNaN(Number(input4)) || isNaN(Number(input5)) || isNaN(Number(input6)) || isNaN(Number(input7)) || isNaN(Number(input8)) || isNaN(Number(input9)) || isNaN(Number(input10))) {
+                alert("Please enter numeric values only.");
+                return false;
+            }
+        }
+    </script>
+</head>
+
+
+<body>
+    <div class="fixed-div">
+        <header>
+            <h1>House Price Predictor</h1>
+        </header>
+        <form method="post" action="/predict" id="rows" onsubmit="return validateForm()">
+            <div class="container">
+                <div class="input-group">
+                    <label for="input1"><b>Bedrooms</b></label>
+                    <input type="text" id="input1" placeholder="Number of bedrooms" name="bedrooms">
+                </div>
+
+                <div class="input-group">
+                    <label for="input2"><b>Bathrooms</b></label>
+                    <input type="text" id="input2" placeholder="Number of bathrooms" name="bathrooms">
+                </div>
+
+                <div class="input-group">
+                    <label for="input3"><b>Area of Living Room</b></label>
+                    <input type="text" id="input3" placeholder="Area of Living Room in Sq. feet" name="sqft_living">
+                </div>
+
+                <div class="input-group">
+                    <label for="input4"><b>Area of Lot</b></label>
+                    <input type="text" id="input4" placeholder="Area of Lot in Sq. feet" name="sqft_lot">
+                </div>
+
+                <div class="input-group">
+                    <label for="input5"><b>Floors</b></label>
+                    <input type="text" id="input5" placeholder="Number of floors" name="floors">
+                </div>
+
+                <div class="input-group">
+                    <label for="input6"><b>Waterfront</b></label>
+                    <input type="text" id="input6" placeholder="Number of waterfront" name="waterfront">
+                </div>
+
+                <div class="input-group">
+                    <label for="input7"><b>Area of house Apart Basement</b></label>
+                    <input type="text" id="input7" placeholder="Apart from basement Sq feet of house" name="sqft_above">
+                </div>
+
+                <div class="input-group">
+                    <label for="input8"><b>Area of basement</b></label>
+                    <input type="text" id="input8" placeholder="Area of basement in Sq. feet" name="sqft_basement">
+                </div>
+
+                <div class="input-group">
+                    <label for="input9"><b>Built Year</b></label>
+                    <input type="text" id="input9" placeholder="Built Year of house. e.g, 1955" name="yr_built">
+                </div>
+
+                <div class="input-group">
+                    <label for="input10"><b>Renovation Year</b></label>
+                    <input type="text" id="input10" placeholder="If not then type 0." name="yr_renovated">
+                </div>
+
+                <div class="submit-button">
+                    <button type="submit" value="Predict"><b>Get Prediction</b></button>
+                    <a href="/"><b>Reset</b></a>
+                </div>
+
+                {% if result %}
+                <p class="prediction">
+                    Predicted Price is: {{ result }}
+                </p>
+                {% endif %}
+            </div>
+        </form>
+    </div>
+</body
